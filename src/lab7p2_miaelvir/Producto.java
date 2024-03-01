@@ -25,6 +25,15 @@ public class Producto {
         this.nombre = nombre;
         this.precio = precio;
     }
+    
+    public Producto(int id, String nombre, int categoria, Double precio, int aisle, int bin) {
+        this.id = id;
+        this.categoria = categoria;
+        this.aisle = aisle;
+        this.bin = bin;
+        this.nombre = nombre;
+        this.precio = precio;
+    }
 
     public int getId() {
         return id;

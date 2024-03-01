@@ -5,13 +5,16 @@
 package lab7p2_miaelvir;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -87,6 +90,25 @@ public class Principal extends javax.swing.JFrame {
         jt_Tabla.setForeground(new java.awt.Color(255, 255, 255));
         jt_Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -141,7 +163,13 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu4.setText("Clear");
 
+        jmi_clearCommand.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmi_clearCommand.setText("Clear Command Line");
+        jmi_clearCommand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_clearCommandActionPerformed(evt);
+            }
+        });
         jMenu4.add(jmi_clearCommand);
 
         jmi_refreshArbol.setText("Clear Table");
@@ -182,10 +210,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_EnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_EnterMouseClicked
         DefaultTableModel modeloTaba = (DefaultTableModel)jt_Tabla.getModel(); 
+        
         File archivo = null; 
         //System.out.println(tf_command.getText());
         String [] commandLine = tf_command.getText().split(" "); 
         if (commandLine[0].equals("./load")) {
+            for (int i = modeloTaba.getRowCount()-1;  i >= 0 ; i--) {
+                modeloTaba.removeRow(i);
+            }
            archivo = new File("./"+commandLine[1]); 
             //System.out.println(commandLine[0]+commandLine[1]);
             try { 
@@ -209,8 +241,40 @@ public class Principal extends javax.swing.JFrame {
             
             
         }else if (commandLine[0].equals("./create")) {
+            archivo = new File("./"+commandLine[1]);
+//            try { 
+                administrarProductos ap = new administrarProductos("./"+commandLine[1]);
+                System.out.println("dashgdasjhdas1");
+                System.out.println("o "+modeloTaba.getRowCount());
+                for (int i = 0; i < modeloTaba.getRowCount(); i++) {
+                    Producto p = new Producto((Integer)modeloTaba.getValueAt(i, 0),
+                            (String)modeloTaba.getValueAt(i, 1), (Integer)modeloTaba.getValueAt(i, 2),
+                            (Double)modeloTaba.getValueAt(i, 3), (Integer)modeloTaba.getValueAt(i, 4), (Integer)modeloTaba.getValueAt(i, 5)); 
+                    ap.getProductos().add(p); 
+                    System.out.println("dashgdasjhdasg");
+                     System.out.println((Integer)modeloTaba.getValueAt(i, 0) +" "+(String)modeloTaba.getValueAt(i, 1));
+                }
+               
+            try {
+                ap.escribirArchivo();
+//                FileWriter fw = new FileWriter(archivo);
+//                BufferedWriter bw = new BufferedWriter(fw); 
+//                for (int i = 0; i < modeloTaba.getColumnCount(); i++) {
+//                    for (int j = 0; j < modeloTaba.getRowCount(); j++) {
+//                        bw.write( modeloTaba.getValueAt(j, i));
+//                    }
+//                }
+                
+//            } catch (IOException ex) {
+//                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             
         }else if (commandLine[0].equals("./clear")) {
+            clear();
             
         }else if (commandLine[0].equals("./refresh")) {
             
@@ -218,11 +282,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_EnterMouseClicked
 
     private void jb_EnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EnterActionPerformed
-      
-        
-        
-        
+        clear();   
     }//GEN-LAST:event_jb_EnterActionPerformed
+
+    private void jmi_clearCommandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_clearCommandActionPerformed
+       tf_command.setText("");
+        
+    }//GEN-LAST:event_jmi_clearCommandActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,6 +323,15 @@ public class Principal extends javax.swing.JFrame {
                 new Principal().setVisible(true);
             }
         });
+    }
+    
+    public void clear(){
+       DefaultTableModel modeloTaba = (DefaultTableModel)jt_Tabla.getModel(); 
+        for (int i = modeloTaba.getRowCount()-1;  i >= 0 ; i--) {
+                modeloTaba.removeRow(i);
+            }
+        jt_Tabla.setModel(modeloTaba);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
