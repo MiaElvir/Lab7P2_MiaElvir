@@ -87,25 +87,12 @@ public class Principal extends javax.swing.JFrame {
         jt_Tabla.setForeground(new java.awt.Color(255, 255, 255));
         jt_Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
                 "ID", "Nombre", "Categoria", "Precio", "Aisle", "Bin"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jScrollPane2.setViewportView(jt_Tabla);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -196,22 +183,24 @@ public class Principal extends javax.swing.JFrame {
     private void jb_EnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_EnterMouseClicked
         DefaultTableModel modeloTaba = (DefaultTableModel)jt_Tabla.getModel(); 
         File archivo = null; 
-        System.out.println(tf_command.getText());
+        //System.out.println(tf_command.getText());
         String [] commandLine = tf_command.getText().split(" "); 
         if (commandLine[0].equals("./load")) {
-            archivo = new File("./"+commandLine[1]); 
-            System.out.println(commandLine[0]+commandLine[1]);
+           archivo = new File("./"+commandLine[1]); 
+            //System.out.println(commandLine[0]+commandLine[1]);
             try { 
+                
                 FileReader fr = new FileReader(archivo);
                 BufferedReader bf = new BufferedReader(fr); 
                 String linea = ""; 
                 while ((linea = bf.readLine()) != null){
-                    System.out.println(linea);
                     String [] papoy = linea.split(","); 
                     
                     //System.out.println(papoy);
-                    //modeloTaba.addRow(papoy);  
+                    modeloTaba.addRow(papoy);  
+                   
                 }
+                jt_Tabla.setModel(modeloTaba);
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(evt.getComponent(), "Este archivo no existe");
             } catch (IOException ex) {
