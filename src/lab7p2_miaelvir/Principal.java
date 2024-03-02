@@ -205,7 +205,12 @@ public class Principal extends javax.swing.JFrame {
         jmi_estructuraP.setText("Product Structure");
         jm_help.add(jmi_estructuraP);
 
-        jMenuItem7.setText("jmi_comandosAyuda");
+        jMenuItem7.setText("comandos");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jm_help.add(jMenuItem7);
 
         jMenuBar1.add(jm_help);
@@ -327,6 +332,14 @@ public class Principal extends javax.swing.JFrame {
         refresh();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+       JOptionPane.showMessageDialog(this, "Los comandos son los siguientes: \n"
+               + "1. ./load - Muestra un archivo en la tabla \n"
+               + "2. ./create - Crea un archivo a base de  la tabla\n"
+               + "3. ./clear - remueve todo lo existente en la tabla"
+               + "\n4. ./refresh - sube los documentos de texto al arbol");
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,16 +385,17 @@ public class Principal extends javax.swing.JFrame {
     }
     
     public void refresh(){
-        DefaultTreeModel modeli = (DefaultTreeModel)jt_Tabla.getModel(); 
+        DefaultTreeModel modeli = (DefaultTreeModel)jt_Arbol.getModel(); 
             File p = new File("."); 
-            File [] we = p.listFiles(); 
+            File [] we = p.listFiles();
+             DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modeli.getRoot(); 
             for (File t : we) {
                 if (t.getPath().contains(".txt")) {
                     DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(t.getName()); 
-                    DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modeli.getRoot(); 
                     raiz.add(nodo);
                 }
             }
+            modeli.setRoot(raiz);
     
     }
     
