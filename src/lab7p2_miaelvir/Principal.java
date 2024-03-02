@@ -45,6 +45,9 @@ public class Principal extends javax.swing.JFrame {
         popup_tabla = new javax.swing.JPopupMenu();
         jmi_clearTable = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        popup_Arbol = new javax.swing.JPopupMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         tf_command = new javax.swing.JTextField();
         jb_Enter = new javax.swing.JButton();
@@ -74,11 +77,17 @@ public class Principal extends javax.swing.JFrame {
         popup_tabla.add(jmi_clearTable);
 
         jMenuItem2.setText("jMenuItem2");
-        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem2MouseClicked(evt);
+
+        jMenuItem3.setText("Refresh trees");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
             }
         });
+        popup_Arbol.add(jMenuItem3);
+
+        jMenuItem4.setText("Load files");
+        popup_Arbol.add(jMenuItem4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +114,11 @@ public class Principal extends javax.swing.JFrame {
         jt_Arbol.setForeground(new java.awt.Color(0, 0, 0));
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("CSVs");
         jt_Arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_Arbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_ArbolMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_Arbol);
 
         jt_Tabla.setBackground(new java.awt.Color(51, 51, 51));
@@ -136,6 +150,11 @@ public class Principal extends javax.swing.JFrame {
                 "ID", "Nombre", "Categoria", "Precio", "Aisle", "Bin"
             }
         ));
+        jt_Tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_TablaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jt_Tabla);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -363,12 +382,23 @@ public class Principal extends javax.swing.JFrame {
         clear();
     }//GEN-LAST:event_jmi_clearTableActionPerformed
 
-    private void jMenuItem2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MouseClicked
-        
-        if (evt.isMetaDown()) {
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       
+        refresh();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jt_TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_TablaMouseClicked
+       if (evt.isMetaDown()) {
            popup_tabla.show(evt.getComponent(), evt.getX(), evt.getY());
         }
-    }//GEN-LAST:event_jMenuItem2MouseClicked
+    }//GEN-LAST:event_jt_TablaMouseClicked
+
+    private void jt_ArbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_ArbolMouseClicked
+        
+        if (evt.isMetaDown()) {
+            popup_Arbol.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jt_ArbolMouseClicked
 
     /**
      * @param args the command line arguments
@@ -463,6 +493,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
@@ -478,6 +510,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmi_refreshArbol;
     private javax.swing.JTree jt_Arbol;
     private javax.swing.JTable jt_Tabla;
+    private javax.swing.JPopupMenu popup_Arbol;
     private javax.swing.JPopupMenu popup_tabla;
     private javax.swing.JTextField tf_command;
     // End of variables declaration//GEN-END:variables
