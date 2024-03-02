@@ -240,6 +240,11 @@ public class Principal extends javax.swing.JFrame {
         jm_help.setText("Help");
 
         jmi_estructuraP.setText("Product Structure");
+        jmi_estructuraP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_estructuraPActionPerformed(evt);
+            }
+        });
         jm_help.add(jmi_estructuraP);
 
         jMenuItem7.setText("comandos");
@@ -399,6 +404,14 @@ public class Principal extends javax.swing.JFrame {
             popup_Arbol.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jt_ArbolMouseClicked
+
+    private void jmi_estructuraPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_estructuraPActionPerformed
+        
+        JOptionPane.showMessageDialog(null, "Los productos se caracterizan por: "
+                + "\n1. ID - un numero entero\n2. Nombre - un string"
+                + "\n3. categoria - un entero\n4. Aisle - un numero entero de 3 digitos\n"
+                + "5. Precio - un numero decimal de 2 decimales\n6. Bin - Numero entero de 3");
+    }//GEN-LAST:event_jmi_estructuraPActionPerformed
 
     /**
      * @param args the command line arguments
