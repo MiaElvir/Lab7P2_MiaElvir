@@ -42,6 +42,9 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popup_tabla = new javax.swing.JPopupMenu();
+        jmi_clearTable = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         tf_command = new javax.swing.JTextField();
         jb_Enter = new javax.swing.JButton();
@@ -61,6 +64,21 @@ public class Principal extends javax.swing.JFrame {
         jm_help = new javax.swing.JMenu();
         jmi_estructuraP = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+
+        jmi_clearTable.setText("Clear Table");
+        jmi_clearTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_clearTableActionPerformed(evt);
+            }
+        });
+        popup_tabla.add(jmi_clearTable);
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem2MouseClicked(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -340,6 +358,18 @@ public class Principal extends javax.swing.JFrame {
                + "\n4. ./refresh - sube los documentos de texto al arbol");
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jmi_clearTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_clearTableActionPerformed
+       
+        clear();
+    }//GEN-LAST:event_jmi_clearTableActionPerformed
+
+    private void jMenuItem2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MouseClicked
+        
+        if (evt.isMetaDown()) {
+           popup_tabla.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jMenuItem2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -432,6 +462,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
@@ -440,12 +471,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jb_Enter;
     private javax.swing.JMenu jm_help;
     private javax.swing.JMenuItem jmi_clearCommand;
+    private javax.swing.JMenuItem jmi_clearTable;
     private javax.swing.JMenuItem jmi_estructuraP;
     private javax.swing.JMenuItem jmi_importFile;
     private javax.swing.JMenu jmi_newFile;
     private javax.swing.JMenuItem jmi_refreshArbol;
     private javax.swing.JTree jt_Arbol;
     private javax.swing.JTable jt_Tabla;
+    private javax.swing.JPopupMenu popup_tabla;
     private javax.swing.JTextField tf_command;
     // End of variables declaration//GEN-END:variables
 }
