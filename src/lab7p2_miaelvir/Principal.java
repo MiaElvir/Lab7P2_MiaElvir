@@ -181,11 +181,21 @@ public class Principal extends javax.swing.JFrame {
         jMenu4.add(jmi_clearCommand);
 
         jmi_refreshArbol.setText("Clear Table");
+        jmi_refreshArbol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_refreshArbolActionPerformed(evt);
+            }
+        });
         jMenu4.add(jmi_refreshArbol);
 
         jMenu2.add(jMenu4);
 
         jMenuItem5.setText("Refresh Trees");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
@@ -265,16 +275,7 @@ public class Principal extends javax.swing.JFrame {
             
         }else if (commandLine[0].equals("./refresh")) {
             
-            DefaultTreeModel modeli = (DefaultTreeModel)jt_Tabla.getModel(); 
-            File p = new File("."); 
-            File [] we = p.listFiles(); 
-            for (File t : we) {
-                if (t.getPath().contains(".txt")) {
-                    DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(t.getName()); 
-                    DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modeli.getRoot(); 
-                    raiz.add(nodo);
-                }
-            }
+            refresh();
             
         }
     }//GEN-LAST:event_jb_EnterMouseClicked
@@ -316,6 +317,15 @@ public class Principal extends javax.swing.JFrame {
             }
 
     }//GEN-LAST:event_jmi_importFileActionPerformed
+
+    private void jmi_refreshArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_refreshArbolActionPerformed
+        
+        clear();
+    }//GEN-LAST:event_jmi_refreshArbolActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        refresh();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,6 +369,20 @@ public class Principal extends javax.swing.JFrame {
             }
         jt_Tabla.setModel(modeloTaba);
 
+    }
+    
+    public void refresh(){
+        DefaultTreeModel modeli = (DefaultTreeModel)jt_Tabla.getModel(); 
+            File p = new File("."); 
+            File [] we = p.listFiles(); 
+            for (File t : we) {
+                if (t.getPath().contains(".txt")) {
+                    DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(t.getName()); 
+                    DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modeli.getRoot(); 
+                    raiz.add(nodo);
+                }
+            }
+    
     }
     
     public  void load(File archivo, String [] commandLine){
