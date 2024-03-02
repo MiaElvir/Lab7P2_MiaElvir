@@ -158,6 +158,11 @@ public class Principal extends javax.swing.JFrame {
         jmi_newFile.add(jMenuItem1);
 
         jmi_importFile.setText("Import File ");
+        jmi_importFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_importFileActionPerformed(evt);
+            }
+        });
         jmi_newFile.add(jmi_importFile);
 
         jMenuBar1.add(jmi_newFile);
@@ -218,29 +223,7 @@ public class Principal extends javax.swing.JFrame {
         //System.out.println(tf_command.getText());
         String [] commandLine = tf_command.getText().split(" "); 
         if (commandLine[0].equals("./load")) {
-            for (int i = modeloTaba.getRowCount()-1;  i >= 0 ; i--) {
-                modeloTaba.removeRow(i);
-            }
-           archivo = new File("./"+commandLine[1]); 
-            //System.out.println(commandLine[0]+commandLine[1]);
-            try { 
-                
-                FileReader fr = new FileReader(archivo);
-                BufferedReader bf = new BufferedReader(fr); 
-                String linea = ""; 
-                while ((linea = bf.readLine()) != null){
-                    String [] papoy = linea.split(","); 
-                    
-                    //System.out.println(papoy);
-                    modeloTaba.addRow(papoy);  
-                   
-                }
-                jt_Tabla.setModel(modeloTaba);
-            } catch (FileNotFoundException ex) {
-                JOptionPane.showMessageDialog(evt.getComponent(), "Este archivo no existe");
-            } catch (IOException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            load(archivo, commandLine);
             
             
         }else if (commandLine[0].equals("./create")) {
@@ -305,6 +288,35 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmi_clearCommandActionPerformed
 
+    private void jmi_importFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_importFileActionPerformed
+        
+        String p = JOptionPane.showInputDialog("Ingrese el nombre del archivo"); 
+        File archivo = new File("./"+p); 
+        DefaultTableModel modeloTaba = (DefaultTableModel)jt_Tabla.getModel(); 
+        for (int i = modeloTaba.getRowCount()-1;  i >= 0 ; i--) {
+                modeloTaba.removeRow(i);
+            }
+        try { 
+                
+                FileReader fr = new FileReader(archivo);
+                BufferedReader bf = new BufferedReader(fr); 
+                String linea = ""; 
+                while ((linea = bf.readLine()) != null){
+                    String [] papoy = linea.split(","); 
+                    
+                    //System.out.println(papoy);
+                    modeloTaba.addRow(papoy);  
+                   
+                }
+                jt_Tabla.setModel(modeloTaba);
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Este archivo no existe");
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+    }//GEN-LAST:event_jmi_importFileActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -347,6 +359,34 @@ public class Principal extends javax.swing.JFrame {
             }
         jt_Tabla.setModel(modeloTaba);
 
+    }
+    
+    public  void load(File archivo, String [] commandLine){
+        DefaultTableModel modeloTaba = (DefaultTableModel)jt_Tabla.getModel(); 
+        for (int i = modeloTaba.getRowCount()-1;  i >= 0 ; i--) {
+                modeloTaba.removeRow(i);
+            }
+           archivo = new File("./"+commandLine[1]); 
+            //System.out.println(commandLine[0]+commandLine[1]);
+            try { 
+                
+                FileReader fr = new FileReader(archivo);
+                BufferedReader bf = new BufferedReader(fr); 
+                String linea = ""; 
+                while ((linea = bf.readLine()) != null){
+                    String [] papoy = linea.split(","); 
+                    
+                    //System.out.println(papoy);
+                    modeloTaba.addRow(papoy);  
+                   
+                }
+                jt_Tabla.setModel(modeloTaba);
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Este archivo no existe");
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
