@@ -13,9 +13,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -241,20 +244,21 @@ public class Principal extends javax.swing.JFrame {
             
             
         }else if (commandLine[0].equals("./create")) {
-            archivo = new File("./"+commandLine[1]);
+            //archivo = new File("./"+commandLine[1]);
 //            try { 
                 administrarProductos ap = new administrarProductos("./"+commandLine[1]);
-                System.out.println("dashgdasjhdas1");
-                System.out.println("o "+modeloTaba.getRowCount());
+                //System.out.println("dashgdasjhdas1");
+                //System.out.println("o "+modeloTaba.getRowCount());
+                System.out.println(modeloTaba.getValueAt(0, 0));
                 for (int i = 0; i < modeloTaba.getRowCount(); i++) {
+                  
                     Producto p = new Producto((Integer)modeloTaba.getValueAt(i, 0),
                             (String)modeloTaba.getValueAt(i, 1), (Integer)modeloTaba.getValueAt(i, 2),
                             (Double)modeloTaba.getValueAt(i, 3), (Integer)modeloTaba.getValueAt(i, 4), (Integer)modeloTaba.getValueAt(i, 5)); 
-                    ap.getProductos().add(p); 
-                    System.out.println("dashgdasjhdasg");
-                     System.out.println((Integer)modeloTaba.getValueAt(i, 0) +" "+(String)modeloTaba.getValueAt(i, 1));
+                    ap.productos.add(p); 
+                    
                 }
-               
+               //Daniel este revisale el codigo
             try {
                 ap.escribirArchivo();
 //                FileWriter fw = new FileWriter(archivo);
@@ -277,6 +281,17 @@ public class Principal extends javax.swing.JFrame {
             clear();
             
         }else if (commandLine[0].equals("./refresh")) {
+            
+            DefaultTreeModel modeli = (DefaultTreeModel)jt_Tabla.getModel(); 
+            File p = new File("."); 
+            File [] we = p.listFiles(); 
+            for (File t : we) {
+                if (t.getPath().contains(".txt")) {
+                    DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(t.getName()); 
+                    DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modeli.getRoot(); 
+                    raiz.add(nodo);
+                }
+            }
             
         }
     }//GEN-LAST:event_jb_EnterMouseClicked

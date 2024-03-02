@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class administrarProductos {
     
-    protected ArrayList<Producto> productos = new ArrayList<>(); 
+    public ArrayList<Producto> productos = new ArrayList<>(); 
     protected File archivo = null; 
 
     public administrarProductos(String path) {
